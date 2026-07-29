@@ -14,19 +14,19 @@ help:
 	@echo "  docker-restart Restart all Docker services"
 
 docker-up: 
-	docker compose up -d --build
+	docker-compose up -d --build
 
 docker-down: 
-	docker compose down -v
+	docker-compose down -v
 
 docker-build: 
-	docker compose build
+	docker-compose build
 
 docker-logs: 
-	docker compose logs -f
+	docker-compose logs -f
 
 docker-ps: 
-	docker compose ps
+	docker-compose ps
 
 docker-restart: 
-	docker compose restart
+	docker-compose restart

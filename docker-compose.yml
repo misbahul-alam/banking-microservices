@@ -20,7 +20,7 @@ services:
       - banking-network
 
   redis:
-    image: redis:7-alpine
+    image: redis:7.4.10-alpine
     container_name: banking-redis
     restart: always
     ports:
