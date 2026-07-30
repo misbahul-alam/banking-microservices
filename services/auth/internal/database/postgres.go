@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"time"
 
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/misbahul-alam/banking-microservices/services/auth/internal/config"
 )
@@ -18,8 +20,6 @@ func NewPostgres(cfg *config.Config) (*pgxpool.Pool, error) {
 		cfg.DBName,
 		cfg.DBSSLMode,
 	)
-
-	fmt.Println(dsn)
 
 	config, err := pgxpool.ParseConfig(dsn)
 	if err != nil {

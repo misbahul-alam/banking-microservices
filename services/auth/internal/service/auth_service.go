@@ -59,6 +59,8 @@ func (s *authService) Register(ctx context.Context, req dto.RegisterRequest) (*d
 	user, err := s.userRepo.CreateUser(ctx, sqlc.CreateUserParams{
 		Email:        req.Email,
 		PasswordHash: hashedPassword,
+		FirstName:    req.FirstName,
+		LastName:     req.LastName,
 	})
 	if err != nil {
 		return nil, err
