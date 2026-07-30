@@ -19,6 +19,8 @@ func NewPostgres(cfg *config.Config) (*pgxpool.Pool, error) {
 		cfg.DBSSLMode,
 	)
 
+	fmt.Println(dsn)
+
 	config, err := pgxpool.ParseConfig(dsn)
 	if err != nil {
 		return nil, err

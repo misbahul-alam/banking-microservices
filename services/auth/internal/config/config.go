@@ -1,6 +1,11 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"errors"
+	"os"
+
+	"github.com/spf13/viper"
+)
 
 type Config struct {
 	AppName      string
@@ -22,7 +27,10 @@ func Load() (*Config, error) {
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
-		return nil, err
+		var configFileNotFoundError viper.ConfigFileNotFoundError
+		if !errors.As(err, &configFileNotFoundError) && !os.IsNotExist(err) {
+			return nil, err
+		}
 	}
 	return &Config{
 		AppName:      viper.GetString("APP_NAME"),
