@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/misbahul-alam/banking-microservices/services/auth/internal/app"
 	"github.com/misbahul-alam/banking-microservices/services/auth/internal/config"
 	"github.com/misbahul-alam/banking-microservices/services/auth/internal/database"
 	"github.com/misbahul-alam/banking-microservices/services/auth/internal/logger"
@@ -37,6 +38,12 @@ func main() {
 	defer db.Close()
 
 	logr.Info("Database connection established")
+
+	ap := app.NewApp(&app.Container{
+		DB: db,
+	})
+
+	ap.Run()
 
 	logr.Info("Auth service starting...",
 		zap.String("app_name", cfg.AppName),
